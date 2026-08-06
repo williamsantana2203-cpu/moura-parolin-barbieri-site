@@ -1,0 +1,736 @@
+<meta charset="utf-8">
+<title>Moura, Parolin e Barbieri — Advogados Associados</title>
+<style>
+  :root{
+    --navy-950:#0a1220;
+    --navy-900:#0f1c31;
+    --navy-800:#16283f;
+    --navy-700:#1e3550;
+    --silver-200:#e2e6ec;
+    --silver-300:#c7cedb;
+    --silver-500:#8891a1;
+    --silver-600:#6b7484;
+    --offwhite-50:#f6f4ee;
+    --offwhite-100:#efeadf;
+    --ink-900:#10192b;
+    --ink-700:#3a4457;
+    --hairline:rgba(199,206,219,0.18);
+    --hairline-dark:rgba(16,25,43,0.12);
+    --font-display:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif;
+    --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --shadow-lg:0 30px 60px -25px rgba(10,18,32,0.45);
+    --shadow-card:0 18px 40px -20px rgba(10,18,32,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:auto;}
+  body{
+    margin:0;
+    background:var(--offwhite-50);
+    color:var(--ink-900);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,blockquote{font-family:var(--font-display); text-wrap:balance; margin:0;}
+  p{margin:0; line-height:1.7;}
+  a{color:inherit; text-decoration:none;}
+  img,canvas{display:block; max-width:100%;}
+  .container{width:100%; max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
+  .eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--silver-500);
+  }
+  .eyebrow.on-dark{color:var(--silver-300);}
+  section{position:relative;}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(10,18,32,0.72);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid rgba(226,230,236,0.08);
+    transition:background .3s ease;
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px clamp(20px,4vw,48px);
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand-mark{width:60px; height:auto; flex-shrink:0; display:block; border-radius:2px;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-text .name{font-family:var(--font-display); font-size:1.05rem; color:var(--offwhite-50); letter-spacing:0.01em;}
+  .brand-text .tag{font-size:0.6rem; letter-spacing:0.16em; color:var(--silver-500); text-transform:uppercase; margin-top:3px;}
+  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links a{
+    font-size:0.86rem; color:var(--silver-300); position:relative; padding:4px 0;
+    transition:color .25s ease;
+  }
+  nav.links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-2px; height:1px;
+    background:var(--silver-300); transform:scaleX(0); transform-origin:left;
+    transition:transform .3s ease;
+  }
+  nav.links a:hover{color:var(--offwhite-50);}
+  nav.links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid rgba(226,230,236,0.28);
+    color:var(--offwhite-50);
+    padding:9px 18px;
+    font-size:0.82rem;
+    border-radius:2px;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .nav-cta:hover{background:rgba(226,230,236,0.08); border-color:rgba(226,230,236,0.5);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  #hero{
+    min-height:100svh;
+    background:var(--navy-950);
+    display:flex; align-items:center;
+    overflow:hidden;
+    padding-top:90px;
+  }
+  #hero-canvas{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0.9;
+  }
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(60% 55% at 18% 30%, rgba(10,18,32,0.15) 0%, rgba(10,18,32,0.78) 62%, rgba(10,18,32,0.96) 100%),
+      linear-gradient(180deg, rgba(10,18,32,0.35) 0%, rgba(10,18,32,0.55) 100%);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.25fr 0.9fr; gap:56px; align-items:end;
+    width:100%; max-width:1180px; margin:0 auto;
+    padding:64px clamp(20px,4vw,48px) 100px;
+  }
+  .hero-copy .eyebrow{margin-bottom:22px;}
+  .hero-copy h1{
+    font-size:clamp(2.6rem, 4.6vw, 4.4rem);
+    line-height:1.06;
+    color:var(--offwhite-50);
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  .hero-copy p.lede{
+    margin-top:26px; max-width:52ch;
+    color:var(--silver-300);
+    font-size:1.05rem;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px; font-size:0.92rem; letter-spacing:0.01em;
+    border-radius:2px; cursor:pointer; border:1px solid transparent;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, background .25s ease, border-color .25s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--silver-200), var(--silver-500));
+    color:var(--navy-950); font-weight:600;
+    box-shadow:0 14px 30px -12px rgba(226,230,236,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 20px 38px -14px rgba(226,230,236,0.5);}
+  .btn-ghost{
+    color:var(--offwhite-50); border-color:rgba(226,230,236,0.35);
+  }
+  .btn-ghost:hover{background:rgba(226,230,236,0.08); transform:translateY(-2px);}
+
+  .hero-quote{
+    background:linear-gradient(160deg, rgba(30,53,80,0.9), rgba(10,18,32,0.94));
+    border:1px solid rgba(226,230,236,0.14);
+    padding:34px 32px;
+    border-radius:3px;
+    box-shadow:var(--shadow-lg);
+    transform-style:preserve-3d;
+    will-change:transform;
+    transition:transform .12s ease-out;
+  }
+  .hero-quote .eyebrow{margin-bottom:18px;}
+  .hero-quote blockquote{
+    color:var(--offwhite-50);
+    font-size:1.28rem;
+    line-height:1.5;
+    font-weight:500;
+  }
+  .hero-quote .divider{width:40px; height:1px; background:var(--silver-500); margin:22px 0 14px;}
+  .hero-quote .cite{font-size:0.82rem; color:var(--silver-500);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem, 3vw, 2.6rem);
+    line-height:1.15; font-weight:500;
+    color:var(--ink-900); margin-top:14px;
+  }
+  .section-head .support{color:var(--ink-700); font-size:1rem; max-width:44ch;}
+  .section-head.on-dark h2{color:var(--offwhite-50);}
+  .section-head.on-dark .support{color:var(--silver-300);}
+
+  /* ---------- ESCRITORIO ---------- */
+  #escritorio{background:var(--offwhite-50); padding:120px 0;}
+  .escritorio-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .escritorio-copy p{color:var(--ink-700); font-size:1.02rem; margin-bottom:20px;}
+  .escritorio-copy a.link{
+    display:inline-flex; align-items:center; gap:8px; margin-top:8px;
+    font-weight:600; color:var(--ink-900); border-bottom:1px solid var(--ink-900); padding-bottom:2px;
+  }
+  .stat-panel{
+    background:var(--navy-950);
+    border-radius:3px;
+    padding:44px 40px;
+    box-shadow:var(--shadow-card);
+    transform-style:preserve-3d;
+    transition:transform .15s ease-out;
+  }
+  .stat-row{display:grid; grid-template-columns:1fr 1fr; gap:32px 24px;}
+  .stat{border-top:1px solid var(--hairline); padding-top:18px;}
+  .stat .num{font-family:var(--font-display); font-size:2.1rem; color:var(--offwhite-50);}
+  .stat .label{font-size:0.8rem; color:var(--silver-500); margin-top:6px;}
+
+  /* ---------- AREAS ---------- */
+  #areas{background:var(--navy-950); padding:120px 0;}
+  .areas-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline);}
+  .area-card{
+    background:var(--navy-950);
+    padding:38px 30px;
+    min-height:230px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transform-style:preserve-3d;
+    transition:transform .15s ease-out, background .3s ease;
+  }
+  .area-card:hover{background:var(--navy-800);}
+  .area-card svg{width:30px; height:30px; color:var(--silver-300);}
+  .area-card h3{
+    font-family:var(--font-display); font-weight:500; font-size:1.12rem;
+    color:var(--offwhite-50); margin-top:26px; line-height:1.3;
+  }
+  .area-card .a-desc{font-size:0.86rem; color:var(--silver-500); margin-top:10px;}
+
+  /* ---------- DIFERENCIAIS ---------- */
+  #diferenciais{background:var(--offwhite-100); padding:120px 0;}
+  .dif-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--hairline-dark);}
+  .dif-card{
+    background:var(--offwhite-100);
+    padding:44px 34px;
+    transform-style:preserve-3d;
+    transition:transform .15s ease-out;
+  }
+  .dif-card .mark{
+    width:44px; height:44px; border-radius:50%;
+    border:1px solid var(--ink-900);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:1.1rem; color:var(--ink-900);
+  }
+  .dif-card h3{margin-top:24px; font-size:1.18rem; font-weight:500; color:var(--ink-900);}
+  .dif-card p{margin-top:12px; color:var(--ink-700); font-size:0.94rem;}
+
+  /* ---------- MISSAO STRIP ---------- */
+  #missao{
+    background:linear-gradient(120deg, var(--navy-900), var(--navy-700));
+    padding:90px 0;
+  }
+  #missao .container{display:flex; align-items:center; gap:60px; flex-wrap:wrap;}
+  #missao blockquote{
+    flex:1 1 480px; font-size:clamp(1.4rem,2.4vw,1.9rem); color:var(--offwhite-50); font-weight:500; line-height:1.4;
+  }
+  #missao .missao-side{flex:0 0 220px; border-left:1px solid var(--hairline); padding-left:28px;}
+  #missao .missao-side .eyebrow{margin-bottom:10px;}
+  #missao .missao-side p{color:var(--silver-500); font-size:0.9rem;}
+
+  /* ---------- CONTATO ---------- */
+  #contato{
+    background:
+      radial-gradient(1px 1px at 50% 50%, rgba(199,206,219,0.35) 1px, transparent 1.5px) 0 0/34px 34px,
+      radial-gradient(60% 90% at 25% 0%, rgba(30,53,80,0.6), transparent 60%),
+      var(--navy-950);
+    padding:130px 0 90px; position:relative; overflow:hidden;
+  }
+  #contato .scrim{position:absolute; inset:0; background:radial-gradient(60% 80% at 50% 0%, rgba(10,18,32,0.1), rgba(10,18,32,0.85) 75%); pointer-events:none;}
+  #contato .container{position:relative; z-index:2;}
+  .contato-grid{display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; align-items:center;}
+  .contato-copy h2{font-size:clamp(2rem,3.4vw,2.9rem); color:var(--offwhite-50); font-weight:500; line-height:1.14;}
+  .contato-copy p{color:var(--silver-300); margin-top:20px; max-width:48ch; font-size:1.02rem;}
+  .contato-actions{display:flex; gap:16px; margin-top:36px; flex-wrap:wrap;}
+  .contato-card{
+    background:rgba(246,244,238,0.04);
+    border:1px solid rgba(226,230,236,0.16);
+    padding:36px 32px; border-radius:3px;
+  }
+  .contato-card .row{display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--hairline); font-size:0.92rem;}
+  .contato-card .row:last-child{border-bottom:none;}
+  .contato-card .row .k{color:var(--silver-500);}
+  .contato-card .row .v{color:var(--offwhite-50); font-weight:500; text-align:right;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-950); border-top:1px solid var(--hairline); padding:44px 0;}
+  footer .container{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .fbrand{display:flex; align-items:center; gap:12px; color:var(--silver-500); font-size:0.82rem;}
+  footer .fbrand .brand-mark.foot{width:36px; height:auto; border-radius:2px;}
+  footer .flinks{display:flex; gap:26px;}
+  footer .flinks a{color:var(--silver-500); font-size:0.82rem; transition:color .2s ease;}
+  footer .flinks a:hover{color:var(--offwhite-50);}
+
+  @media (max-width:920px){
+    nav.links, .nav-cta{display:none;}
+    .hero-inner{grid-template-columns:1fr; padding-bottom:70px;}
+    .escritorio-grid{grid-template-columns:1fr;}
+    .areas-grid{grid-template-columns:repeat(2,1fr);}
+    .dif-grid{grid-template-columns:1fr;}
+    .section-head{grid-template-columns:1fr;}
+    .contato-grid{grid-template-columns:1fr;}
+    #missao .container{flex-direction:column; align-items:flex-start;}
+    #missao .missao-side{border-left:none; border-top:1px solid var(--hairline); padding-left:0; padding-top:20px;}
+  }
+  @media (max-width:640px){
+    .areas-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .hero-quote,.stat-panel,.area-card,.dif-card{transition:none;}
+  }
+</style>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#hero">
+      <img class="brand-mark" src="/logo.webp" alt="Moura, Parolin e Barbieri" />
+      <span class="brand-text">
+        <span class="name">Moura, Parolin e Barbieri</span>
+        <span class="tag">Advogados Associados</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="#hero">Início</a>
+      <a href="#escritorio">O Escritório</a>
+      <a href="#areas">Áreas de Atuação</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="nav-cta" href="#contato">
+      <span>(11) 3255-2568</span>
+    </a>
+  </div>
+</header>
+
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow on-dark">Advocacia desde 2003</div>
+      <h1>Tradição jurídica<br>com visão estratégica.</h1>
+      <p class="lede">O escritório Moura, Parolin e Barbieri une excelência técnica, atendimento qualificado e atuação estratégica para empresas e pessoas físicas que buscam segurança, clareza e confiança em cada etapa do relacionamento jurídico.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contato">Fale com o escritório →</a>
+        <a class="btn btn-ghost" href="#areas">Áreas de atuação</a>
+      </div>
+    </div>
+    <div class="hero-quote" id="tilt-quote">
+      <div class="eyebrow on-dark">Boutique jurídica</div>
+      <blockquote>&ldquo;Praticar a Advocacia com excelência e criatividade — superando expectativas em cada relação.&rdquo;</blockquote>
+      <div class="divider"></div>
+      <div class="cite">Missão institucional</div>
+    </div>
+  </div>
+
+</section>
+
+<section id="escritorio">
+  <div class="container">
+    <div class="escritorio-grid">
+      <div class="escritorio-copy">
+        <div class="eyebrow">O Escritório</div>
+        <h2 style="font-size:clamp(1.9rem,3vw,2.6rem); font-weight:500; margin-top:14px; line-height:1.2;">Especialistas em harmonia societária.</h2>
+        <p style="margin-top:26px;">Fundado em 2003, o Moura, Parolin e Barbieri Advogados Associados consolidou-se como um escritório especializado em Direito Societário, com foco na condução de demandas voltadas ao relacionamento e aos direitos dos sócios.</p>
+        <p>Com o propósito de alcançar soluções que promovam a harmonia societária, nossa equipe reúne profissionais de vasta experiência na identificação e defesa de direitos, na liderança de negociações e na elaboração de documentos seguros.</p>
+        <p>A atuação no âmbito judicial é outro pilar fundamental da nossa prática, permitindo-nos acompanhar o cliente de forma plena em todas as etapas de seus projetos e eventuais litígios.</p>
+        <p>Ao longo dessa trajetória, tivemos a oportunidade de participar diretamente do debate de teses de grande relevância — incluindo o patrocínio de <em>leading cases</em> nas áreas de Energia Elétrica, Telecomunicações e Direito Bancário.</p>
+        <p>Olhando para o futuro, mantemos o compromisso de investir continuamente em pessoas e tecnologia, guiados pela busca diuturna de excelência em nossos serviços.</p>
+        <p style="margin-top:28px; font-family:var(--font-display); font-size:1.2rem; color:var(--ink-900);">Seja bem-vindo.</p>
+        <a class="link" href="#areas">Conheça nossas áreas de atuação →</a>
+      </div>
+      <div class="stat-panel" id="tilt-stats">
+        <div class="stat-row">
+          <div class="stat"><div class="num">2003</div><div class="label">Ano de fundação</div></div>
+          <div class="stat"><div class="num">100%</div><div class="label">Atendimento com sócios</div></div>
+          <div class="stat"><div class="num">4+</div><div class="label">Áreas de especialidade</div></div>
+          <div class="stat"><div class="num">1:1</div><div class="label">Relação cliente-caso</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="areas">
+  <div class="container">
+    <div class="section-head on-dark">
+      <div>
+        <div class="eyebrow on-dark">Áreas de Atuação</div>
+        <h2>Especialidade onde mais importa.</h2>
+      </div>
+      <p class="support">Atuação concentrada, sem dispersão — cada frente é conduzida por quem domina a matéria a fundo.</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-card tilt-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M5 7h14M7 7l-4 8a4 4 0 0 0 8 0l-4-8zM17 7l-4 8a4 4 0 0 0 8 0l-4-8z"/></svg>
+        <div>
+          <h3>Direito Societário e Empresarial</h3>
+          <p class="a-desc">Estruturação, governança e operações societárias.</p>
+        </div>
+      </div>
+      <div class="area-card tilt-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v4h-4z"/></svg>
+        <div>
+          <h3>Direito Processual Civil</h3>
+          <p class="a-desc">Estratégia contenciosa e representação em juízo.</p>
+        </div>
+      </div>
+      <div class="area-card tilt-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="3.4"/><path d="M5 21c0-4 3-6.6 7-6.6S19 17 19 21"/></svg>
+        <div>
+          <h3>Direito Civil</h3>
+          <p class="a-desc">Relações contratuais, patrimoniais e sucessórias.</p>
+        </div>
+      </div>
+      <div class="area-card tilt-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg>
+        <div>
+          <h3>Compliance</h3>
+          <p class="a-desc">Programas de integridade e gestão de risco jurídico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diferenciais">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Diferenciais</div>
+        <h2>Como atendemos.</h2>
+      </div>
+      <p class="support">Três princípios guiam cada caso que passa pelo escritório, do primeiro contato à conclusão.</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card tilt-card">
+        <div class="mark">A</div>
+        <h3>Atendimento próximo</h3>
+        <p>Relação direta com os sócios em cada caso.</p>
+      </div>
+      <div class="dif-card tilt-card">
+        <div class="mark">V</div>
+        <h3>Visão estratégica</h3>
+        <p>Decisões jurídicas que olham para o negócio como um todo.</p>
+      </div>
+      <div class="dif-card tilt-card">
+        <div class="mark">C</div>
+        <h3>Cuidado artesanal</h3>
+        <p>Soluções desenhadas sob medida, com profundidade técnica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="missao">
+  <div class="container">
+    <blockquote>&ldquo;Praticar a Advocacia com excelência e criatividade — superando expectativas em cada relação.&rdquo;</blockquote>
+    <div class="missao-side">
+      <div class="eyebrow on-dark">Missão institucional</div>
+      <p>Moura, Parolin e Barbieri — Advogados Associados, desde 2003.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="contato-grid">
+      <div class="contato-copy">
+        <div class="eyebrow on-dark">Consulta</div>
+        <h2 style="margin-top:16px;">Vamos conversar sobre o seu caso.</h2>
+        <p>Entre em contato com o escritório para uma análise inicial. Atendimento das 9h às 18h.</p>
+        <div class="contato-actions">
+          <a class="btn btn-primary" href="tel:+551132552568">Agendar atendimento</a>
+          <a class="btn btn-ghost" href="tel:+551132552568">(11) 3255-2568</a>
+        </div>
+      </div>
+      <div class="contato-card">
+        <div class="row"><span class="k">Telefone</span><span class="v">(11) 3255-2568</span></div>
+        <div class="row"><span class="k">Atendimento</span><span class="v">9h às 18h</span></div>
+        <div class="row"><span class="k">Escritório</span><span class="v">Moura, Parolin e Barbieri</span></div>
+        <div class="row"><span class="k">Fundação</span><span class="v">Agosto de 2003</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="fbrand">
+      <img class="brand-mark foot" src="/logo.webp" alt="Moura, Parolin e Barbieri" />
+      <span>© 2026 Moura, Parolin e Barbieri — Advogados Associados</span>
+    </div>
+    <div class="flinks">
+      <a href="#hero">Início</a>
+      <a href="#escritorio">O Escritório</a>
+      <a href="#areas">Áreas de Atuação</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </div>
+</footer>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SILVER = 0xc7cedb;
+  var NAVY = 0x0a1220;
+
+  function buildEmblemGeometry(){
+    // Rectangle frame (edges) matching the institutional mark
+    var frameShape = new THREE.Shape();
+    var w = 2.2, h = 1.5;
+    frameShape.moveTo(-w, -h);
+    frameShape.lineTo(w, -h);
+    frameShape.lineTo(w, h);
+    frameShape.lineTo(-w, h);
+    frameShape.lineTo(-w, -h);
+    var frameGeo = new THREE.ExtrudeGeometry(frameShape, {depth:0.05, bevelEnabled:false, curveSegments:1});
+    var holeShape = new THREE.Shape();
+    var w2 = w - 0.12, h2 = h - 0.12;
+    holeShape.moveTo(-w2,-h2); holeShape.lineTo(w2,-h2); holeShape.lineTo(w2,h2); holeShape.lineTo(-w2,h2); holeShape.lineTo(-w2,-h2);
+    frameShape.holes.push(holeShape);
+    frameGeo.dispose();
+    var finalFrameGeo = new THREE.ExtrudeGeometry(frameShape, {depth:0.05, bevelEnabled:false, curveSegments:1});
+    finalFrameGeo.center();
+    return finalFrameGeo;
+  }
+
+  function buildMountainGeometry(){
+    // Mountain / M silhouette echoing the institutional logo
+    var shape = new THREE.Shape();
+    shape.moveTo(-1.7, -0.75);
+    shape.lineTo(-0.55, 0.85);
+    shape.lineTo(0, -0.05);
+    shape.lineTo(0.55, 0.85);
+    shape.lineTo(1.7, -0.75);
+    shape.lineTo(1.35, -0.75);
+    shape.lineTo(0.55, 0.35);
+    shape.lineTo(0, -0.45);
+    shape.lineTo(-0.55, 0.35);
+    shape.lineTo(-1.35, -0.75);
+    shape.closePath();
+    var geo = new THREE.ExtrudeGeometry(shape, {depth:0.16, bevelEnabled:true, bevelThickness:0.02, bevelSize:0.015, bevelSegments:2, curveSegments:8});
+    geo.center();
+    return geo;
+  }
+
+  function initScene(canvas, opts){
+    opts = opts || {};
+    var particleCount = opts.particleCount || 520;
+    var showEmblem = opts.showEmblem !== false;
+
+    var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true, powerPreference:'low-power'});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 1.5));
+
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(NAVY, opts.fogDensity || 0.045);
+    var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 0, 11);
+
+    // Lighting - three point setup, subdued for premium metal look
+    scene.add(new THREE.AmbientLight(0x6f89b3, 0.55));
+    var key = new THREE.DirectionalLight(0xffffff, 1.1);
+    key.position.set(4, 5, 6);
+    scene.add(key);
+    var rim = new THREE.DirectionalLight(0x9db3d6, 0.9);
+    rim.position.set(-6, -2, -4);
+    scene.add(rim);
+    var fill = new THREE.DirectionalLight(0x445b7d, 0.5);
+    fill.position.set(-3, 2, 4);
+    scene.add(fill);
+
+    // Particle field
+    var positions = new Float32Array(particleCount * 3);
+    var depths = new Float32Array(particleCount);
+    for (var i = 0; i < particleCount; i++){
+      var r = 6.5 + Math.random() * 7;
+      var theta = Math.random() * Math.PI * 2;
+      var y = (Math.random() - 0.5) * 9;
+      positions[i*3] = Math.cos(theta) * r * (0.6 + Math.random()*0.4);
+      positions[i*3+1] = y;
+      positions[i*3+2] = Math.sin(theta) * r * 0.5 - 2;
+      depths[i] = Math.random();
+    }
+    var pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    var pMat = new THREE.PointsMaterial({
+      color: SILVER, size: 0.065, sizeAttenuation:true,
+      transparent:true, opacity:0.8, depthWrite:false
+    });
+    var points = new THREE.Points(pGeo, pMat);
+    scene.add(points);
+
+    // Sparse constellation lines between nearby particles (computed once)
+    var lineVerts = [];
+    var maxDist = 2.6, maxLines = 90;
+    outer:
+    for (var a = 0; a < particleCount; a += 3){
+      for (var b = a+1; b < particleCount; b += 5){
+        var dx = positions[a*3]-positions[b*3], dy = positions[a*3+1]-positions[b*3+1], dz = positions[a*3+2]-positions[b*3+2];
+        var d = Math.sqrt(dx*dx+dy*dy+dz*dz);
+        if (d < maxDist){
+          lineVerts.push(positions[a*3],positions[a*3+1],positions[a*3+2], positions[b*3],positions[b*3+1],positions[b*3+2]);
+          if (lineVerts.length/6 >= maxLines) break outer;
+        }
+      }
+    }
+    if (lineVerts.length){
+      var lGeo = new THREE.BufferGeometry();
+      lGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(lineVerts), 3));
+      var lMat = new THREE.LineBasicMaterial({color: SILVER, transparent:true, opacity:0.22});
+      scene.add(new THREE.LineSegments(lGeo, lMat));
+    }
+
+    var emblemGroup = null;
+    if (showEmblem){
+      emblemGroup = new THREE.Group();
+      var mountainMat = new THREE.MeshStandardMaterial({color:0xd7dde6, metalness:0.8, roughness:0.3, emissive:0x0a1220, emissiveIntensity:0.12, transparent:true, opacity:0.85});
+      var mountain = new THREE.Mesh(buildMountainGeometry(), mountainMat);
+      emblemGroup.add(mountain);
+
+      var frameMat = new THREE.MeshStandardMaterial({color:0x9aa4b2, metalness:0.65, roughness:0.42, side:THREE.DoubleSide, transparent:true, opacity:0.7});
+      var frame = new THREE.Mesh(buildEmblemGeometry(), frameMat);
+      frame.scale.set(1.18, 1.18, 1);
+      frame.position.z = -0.12;
+      emblemGroup.add(frame);
+
+      emblemGroup.scale.setScalar(0.95);
+      emblemGroup.position.set(3.4, 0.1, -2.4);
+      emblemGroup.rotation.x = 0.06;
+      emblemGroup.rotation.y = -0.35;
+      scene.add(emblemGroup);
+
+      // soft glow sprite behind emblem (fake bloom via additive blending)
+      var glowCanvas = document.createElement('canvas');
+      glowCanvas.width = 256; glowCanvas.height = 256;
+      var gctx = glowCanvas.getContext('2d');
+      var grad = gctx.createRadialGradient(128,128,0,128,128,128);
+      grad.addColorStop(0, 'rgba(170,190,220,0.55)');
+      grad.addColorStop(1, 'rgba(170,190,220,0)');
+      gctx.fillStyle = grad;
+      gctx.fillRect(0,0,256,256);
+      var glowTex = new THREE.CanvasTexture(glowCanvas);
+      var glowMat = new THREE.SpriteMaterial({map:glowTex, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending});
+      var glow = new THREE.Sprite(glowMat);
+      glow.scale.set(6,6,1);
+      glow.position.copy(emblemGroup.position);
+      glow.position.z += 0.3;
+      scene.add(glow);
+    }
+
+    var mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+    function onPointerMove(e){
+      var rect = canvas.getBoundingClientRect();
+      var x = (e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0].clientX) || rect.width/2);
+      var y = (e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0].clientY) || rect.height/2);
+      targetX = ((x - rect.left) / rect.width - 0.5) * 2;
+      targetY = ((y - rect.top) / rect.height - 0.5) * 2;
+    }
+    window.addEventListener('pointermove', onPointerMove, {passive:true});
+
+    function resize(){
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      if (w === 0 || h === 0) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    var ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    resize();
+
+    var clock = new THREE.Clock();
+    var lastT = 0;
+    var isVisible = true;
+    var rafId = null;
+    var io = new IntersectionObserver(function(entries){
+      isVisible = entries[0].isIntersecting;
+    }, {threshold:0.01});
+    io.observe(canvas);
+
+    function animate(){
+      rafId = requestAnimationFrame(animate);
+      if (!isVisible) return;
+      var t = clock.getElapsedTime();
+      if (reduced && t - lastT < 0.5) { renderer.render(scene, camera); return; }
+      lastT = t;
+
+      mouseX += (targetX - mouseX) * 0.04;
+      mouseY += (targetY - mouseY) * 0.04;
+
+      points.rotation.y = t * 0.02;
+      points.rotation.x = mouseY * 0.06;
+
+      if (emblemGroup){
+        emblemGroup.rotation.y = -0.35 + Math.sin(t * 0.15) * 0.2 + mouseX * 0.15;
+        emblemGroup.rotation.x = 0.06 + mouseY * 0.08;
+      }
+      camera.position.x += (mouseX * 0.6 - camera.position.x) * 0.03;
+      camera.position.y += (-mouseY * 0.4 - camera.position.y) * 0.03;
+      camera.lookAt(0,0,0);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+
+  var heroCanvas = document.getElementById('hero-canvas');
+  if (heroCanvas && window.THREE){
+    initScene(heroCanvas, {particleCount:420, showEmblem:true});
+  }
+
+  // ---- CSS 3D tilt for cards ----
+  if (!reduced){
+    var tiltEls = document.querySelectorAll('.tilt-card, #tilt-quote, #tilt-stats');
+    tiltEls.forEach(function(el){
+      el.addEventListener('mousemove', function(e){
+        var rect = el.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        var rotY = px * 10;
+        var rotX = -py * 10;
+        el.style.transform = 'perspective(700px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(4px)';
+      });
+      el.addEventListener('mouseleave', function(){
+        el.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      });
+    });
+  }
+
+  // ---- Nav background on scroll ----
+  var nav = document.querySelector('header.site-nav');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 40){
+      nav.style.background = 'rgba(10,18,32,0.92)';
+    } else {
+      nav.style.background = 'rgba(10,18,32,0.72)';
+    }
+  }, {passive:true});
+})();
+</script>
