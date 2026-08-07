@@ -1,5 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moura, Parolin e Barbieri — Advogados Associados</title>
+<meta name="description" content="Escritório de advocacia especializado em Direito Societário desde 2003, com foco no relacionamento e nos direitos dos sócios. Atuação consultiva e judicial em São Paulo.">
+<link rel="canonical" href="https://moura-parolin-barbieri.vercel.app/">
+<meta name="theme-color" content="#0a1220">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="apple-touch-icon" href="/logo.webp">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moura, Parolin e Barbieri — Advogados Associados">
+<meta property="og:title" content="Moura, Parolin e Barbieri — Advogados Associados">
+<meta property="og:description" content="Escritório de advocacia especializado em Direito Societário desde 2003, com foco no relacionamento e nos direitos dos sócios.">
+<meta property="og:url" content="https://moura-parolin-barbieri.vercel.app/">
+<meta property="og:image" content="https://moura-parolin-barbieri.vercel.app/logo.webp">
+<meta property="og:locale" content="pt_BR">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Moura, Parolin e Barbieri — Advogados Associados">
+<meta name="twitter:description" content="Escritório de advocacia especializado em Direito Societário desde 2003, com foco no relacionamento e nos direitos dos sócios.">
+<meta name="twitter:image" content="https://moura-parolin-barbieri.vercel.app/logo.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "Moura, Parolin e Barbieri Advogados Associados",
+  "url": "https://moura-parolin-barbieri.vercel.app/",
+  "telephone": "+55-11-3255-2568",
+  "foundingDate": "2003",
+  "areaServed": "BR",
+  "description": "Escritório de advocacia especializado em Direito Societário, com foco em relacionamento e direitos dos sócios."
+}
+</script>
+
 <style>
   :root{
     --navy-950:#0a1220;
@@ -10,6 +46,7 @@
     --silver-300:#c7cedb;
     --silver-500:#8891a1;
     --silver-600:#6b7484;
+    --ink-muted:#5b6475;
     --offwhite-50:#f6f4ee;
     --offwhite-100:#efeadf;
     --ink-900:#10192b;
@@ -42,10 +79,23 @@
     letter-spacing:0.18em;
     text-transform:uppercase;
     font-weight:600;
-    color:var(--silver-500);
+    color:var(--ink-muted);
   }
   .eyebrow.on-dark{color:var(--silver-300);}
   section{position:relative;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--silver-200);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:100;
+    background:var(--offwhite-50); color:var(--ink-900);
+    padding:10px 16px; border-radius:2px; font-size:0.85rem; font-weight:600;
+    transition:top .2s ease;
+  }
+  .skip-link:focus{top:12px;}
 
   /* ---------- NAV ---------- */
   header.site-nav{
@@ -68,11 +118,11 @@
   .brand-text .tag{font-size:0.6rem; letter-spacing:0.16em; color:var(--silver-500); text-transform:uppercase; margin-top:3px;}
   nav.links{display:flex; gap:34px; align-items:center;}
   nav.links a{
-    font-size:0.86rem; color:var(--silver-300); position:relative; padding:4px 0;
+    font-size:0.86rem; color:var(--silver-300); position:relative; padding:12px 0;
     transition:color .25s ease;
   }
   nav.links a::after{
-    content:''; position:absolute; left:0; right:0; bottom:-2px; height:1px;
+    content:''; position:absolute; left:0; right:0; bottom:8px; height:1px;
     background:var(--silver-300); transform:scaleX(0); transform-origin:left;
     transition:transform .3s ease;
   }
@@ -82,13 +132,44 @@
     display:flex; align-items:center; gap:8px;
     border:1px solid rgba(226,230,236,0.28);
     color:var(--offwhite-50);
-    padding:9px 18px;
+    padding:12px 18px;
     font-size:0.82rem;
     border-radius:2px;
     transition:border-color .25s ease, background .25s ease;
   }
   .nav-cta:hover{background:rgba(226,230,236,0.08); border-color:rgba(226,230,236,0.5);}
-  .nav-toggle{display:none;}
+
+  .nav-toggle{
+    display:none;
+    width:44px; height:44px;
+    align-items:center; justify-content:center;
+    background:transparent; border:1px solid rgba(226,230,236,0.28); border-radius:2px;
+    padding:0; cursor:pointer; flex-direction:column; gap:5px;
+  }
+  .nav-toggle span{width:20px; height:2px; background:var(--offwhite-50); display:block; transition:transform .25s ease, opacity .25s ease;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-drawer{
+    position:fixed; inset:0; z-index:60;
+    background:var(--navy-950);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+  }
+  .mobile-drawer[hidden]{display:none;}
+  .mobile-drawer nav{display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .mobile-drawer a{
+    font-family:var(--font-display); font-size:1.7rem; color:var(--offwhite-50);
+    padding:14px 20px;
+  }
+  .mobile-drawer .drawer-cta{
+    margin-top:24px; font-family:var(--font-body); font-size:1rem; font-weight:600;
+    color:var(--navy-950); background:linear-gradient(135deg, var(--silver-200), var(--silver-500));
+    padding:16px 30px; border-radius:2px;
+  }
+  body.drawer-open{overflow:hidden;}
+
+  .mobile-callbar{display:none;}
 
   /* ---------- HERO ---------- */
   #hero{
@@ -101,6 +182,7 @@
   #hero-canvas{
     position:absolute; inset:0; width:100%; height:100%;
     opacity:0.9;
+    pointer-events:none;
   }
   .hero-scrim{
     position:absolute; inset:0;
@@ -131,7 +213,7 @@
   .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
   .btn{
     display:inline-flex; align-items:center; gap:10px;
-    padding:15px 28px; font-size:0.92rem; letter-spacing:0.01em;
+    padding:15px 28px; min-height:44px; font-size:0.92rem; letter-spacing:0.01em;
     border-radius:2px; cursor:pointer; border:1px solid transparent;
     transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, background .25s ease, border-color .25s ease;
   }
@@ -185,8 +267,8 @@
   .escritorio-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
   .escritorio-copy p{color:var(--ink-700); font-size:1.02rem; margin-bottom:20px;}
   .escritorio-copy a.link{
-    display:inline-flex; align-items:center; gap:8px; margin-top:8px;
-    font-weight:600; color:var(--ink-900); border-bottom:1px solid var(--ink-900); padding-bottom:2px;
+    display:inline-flex; align-items:center; gap:8px; margin-top:8px; padding:8px 0;
+    font-weight:600; color:var(--ink-900); border-bottom:1px solid var(--ink-900);
   }
   .stat-panel{
     background:var(--navy-950);
@@ -198,7 +280,7 @@
   }
   .stat-row{display:grid; grid-template-columns:1fr 1fr; gap:32px 24px;}
   .stat{border-top:1px solid var(--hairline); padding-top:18px;}
-  .stat .num{font-family:var(--font-display); font-size:2.1rem; color:var(--offwhite-50);}
+  .stat .num{font-family:var(--font-display); font-size:1.9rem; color:var(--offwhite-50); line-height:1.15;}
   .stat .label{font-size:0.8rem; color:var(--silver-500); margin-top:6px;}
 
   /* ---------- AREAS ---------- */
@@ -233,8 +315,8 @@
     width:44px; height:44px; border-radius:50%;
     border:1px solid var(--ink-900);
     display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display); font-size:1.1rem; color:var(--ink-900);
   }
+  .dif-card .mark svg{width:20px; height:20px; color:var(--ink-900);}
   .dif-card h3{margin-top:24px; font-size:1.18rem; font-weight:500; color:var(--ink-900);}
   .dif-card p{margin-top:12px; color:var(--ink-700); font-size:0.94rem;}
 
@@ -249,7 +331,7 @@
   }
   #missao .missao-side{flex:0 0 220px; border-left:1px solid var(--hairline); padding-left:28px;}
   #missao .missao-side .eyebrow{margin-bottom:10px;}
-  #missao .missao-side p{color:var(--silver-500); font-size:0.9rem;}
+  #missao .missao-side p{color:var(--silver-300); font-size:0.9rem;}
 
   /* ---------- CONTATO ---------- */
   #contato{
@@ -270,22 +352,27 @@
     border:1px solid rgba(226,230,236,0.16);
     padding:36px 32px; border-radius:3px;
   }
-  .contato-card .row{display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--hairline); font-size:0.92rem;}
+  .contato-card .row{display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--hairline); font-size:0.92rem;}
   .contato-card .row:last-child{border-bottom:none;}
   .contato-card .row .k{color:var(--silver-500);}
   .contato-card .row .v{color:var(--offwhite-50); font-weight:500; text-align:right;}
+  .contato-card .row .v a{border-bottom:1px solid transparent; transition:border-color .2s ease;}
+  .contato-card .row .v a:hover{border-color:var(--offwhite-50);}
+  .contato-note{margin-top:18px; font-size:0.78rem; color:var(--silver-500);}
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--navy-950); border-top:1px solid var(--hairline); padding:44px 0;}
   footer .container{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
-  footer .fbrand{display:flex; align-items:center; gap:12px; color:var(--silver-500); font-size:0.82rem;}
+  footer .fbrand{display:flex; align-items:center; gap:12px; color:var(--silver-300); font-size:0.82rem;}
   footer .fbrand .brand-mark.foot{width:36px; height:auto; border-radius:2px;}
   footer .flinks{display:flex; gap:26px;}
-  footer .flinks a{color:var(--silver-500); font-size:0.82rem; transition:color .2s ease;}
+  footer .flinks a{color:var(--silver-300); font-size:0.82rem; padding:10px 0; transition:color .2s ease;}
   footer .flinks a:hover{color:var(--offwhite-50);}
 
   @media (max-width:920px){
-    nav.links, .nav-cta{display:none;}
+    nav.links{display:none;}
+    .nav-cta{display:none;}
+    .nav-toggle{display:flex;}
     .hero-inner{grid-template-columns:1fr; padding-bottom:70px;}
     .escritorio-grid{grid-template-columns:1fr;}
     .areas-grid{grid-template-columns:repeat(2,1fr);}
@@ -294,6 +381,19 @@
     .contato-grid{grid-template-columns:1fr;}
     #missao .container{flex-direction:column; align-items:flex-start;}
     #missao .missao-side{border-left:none; border-top:1px solid var(--hairline); padding-left:0; padding-top:20px;}
+    .mobile-callbar{
+      display:flex; position:fixed; left:0; right:0; bottom:0; z-index:55;
+      background:var(--navy-950); border-top:1px solid var(--hairline);
+      padding:12px clamp(16px,4vw,32px) calc(12px + env(safe-area-inset-bottom));
+    }
+    .mobile-callbar a{
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      width:100%; min-height:48px;
+      background:linear-gradient(135deg, var(--silver-200), var(--silver-500));
+      color:var(--navy-950); font-weight:600; font-size:0.95rem; border-radius:2px;
+    }
+    body{padding-bottom:76px;}
+    footer{padding-bottom:96px;}
   }
   @media (max-width:640px){
     .areas-grid{grid-template-columns:1fr;}
@@ -304,35 +404,54 @@
     .hero-quote,.stat-panel,.area-card,.dif-card{transition:none;}
   }
 </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
 
 <header class="site-nav">
   <div class="nav-inner">
     <a class="brand" href="#hero">
-      <img class="brand-mark" src="/logo.webp" alt="Moura, Parolin e Barbieri" />
+      <img class="brand-mark" src="/logo.webp" alt="Moura, Parolin e Barbieri" width="60" height="27" />
       <span class="brand-text">
         <span class="name">Moura, Parolin e Barbieri</span>
         <span class="tag">Advogados Associados</span>
       </span>
     </a>
-    <nav class="links">
+    <nav class="links" aria-label="Navegação principal">
       <a href="#hero">Início</a>
       <a href="#escritorio">O Escritório</a>
       <a href="#areas">Áreas de Atuação</a>
       <a href="#contato">Contato</a>
     </nav>
-    <a class="nav-cta" href="#contato">
+    <a class="nav-cta" href="tel:+551132552568">
       <span>(11) 3255-2568</span>
     </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
+<div class="mobile-drawer" id="mobileDrawer" hidden>
+  <nav aria-label="Navegação móvel">
+    <a href="#hero">Início</a>
+    <a href="#escritorio">O Escritório</a>
+    <a href="#areas">Áreas de Atuação</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <a class="drawer-cta" href="tel:+551132552568">Ligar: (11) 3255-2568</a>
+</div>
+
+<main id="main">
+
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-scrim"></div>
   <div class="hero-inner">
     <div class="hero-copy">
       <div class="eyebrow on-dark">Advocacia desde 2003</div>
-      <h1>Tradição jurídica<br>com visão estratégica.</h1>
+      <h1>Tradição jurídica com visão estratégica.</h1>
       <p class="lede">O escritório Moura, Parolin e Barbieri une excelência técnica, atendimento qualificado e atuação estratégica para empresas e pessoas físicas que buscam segurança, clareza e confiança em cada etapa do relacionamento jurídico.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contato">Fale com o escritório →</a>
@@ -341,12 +460,11 @@
     </div>
     <div class="hero-quote" id="tilt-quote">
       <div class="eyebrow on-dark">Boutique jurídica</div>
-      <blockquote>&ldquo;Praticar a Advocacia com excelência e criatividade — superando expectativas em cada relação.&rdquo;</blockquote>
+      <blockquote>&ldquo;Direito Societário desde 2003, com o relacionamento e os direitos dos sócios sempre em primeiro plano.&rdquo;</blockquote>
       <div class="divider"></div>
-      <div class="cite">Missão institucional</div>
+      <div class="cite">Foco de atuação</div>
     </div>
   </div>
-
 </section>
 
 <section id="escritorio">
@@ -366,9 +484,9 @@
       <div class="stat-panel" id="tilt-stats">
         <div class="stat-row">
           <div class="stat"><div class="num">2003</div><div class="label">Ano de fundação</div></div>
-          <div class="stat"><div class="num">100%</div><div class="label">Atendimento com sócios</div></div>
-          <div class="stat"><div class="num">4+</div><div class="label">Áreas de especialidade</div></div>
-          <div class="stat"><div class="num">1:1</div><div class="label">Relação cliente-caso</div></div>
+          <div class="stat"><div class="num">23</div><div class="label">Anos de atuação</div></div>
+          <div class="stat"><div class="num">Societário</div><div class="label">Foco principal</div></div>
+          <div class="stat"><div class="num">3</div><div class="label">Leading cases citados</div></div>
         </div>
       </div>
     </div>
@@ -386,28 +504,28 @@
     </div>
     <div class="areas-grid">
       <div class="area-card tilt-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M5 7h14M7 7l-4 8a4 4 0 0 0 8 0l-4-8zM17 7l-4 8a4 4 0 0 0 8 0l-4-8z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M12 3v18M5 7h14M7 7l-4 8a4 4 0 0 0 8 0l-4-8zM17 7l-4 8a4 4 0 0 0 8 0l-4-8z"/></svg>
         <div>
           <h3>Direito Societário e Empresarial</h3>
           <p class="a-desc">Estruturação, governança e operações societárias.</p>
         </div>
       </div>
       <div class="area-card tilt-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v4h-4z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v4h-4z"/></svg>
         <div>
           <h3>Direito Processual Civil</h3>
           <p class="a-desc">Estratégia contenciosa e representação em juízo.</p>
         </div>
       </div>
       <div class="area-card tilt-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="3.4"/><path d="M5 21c0-4 3-6.6 7-6.6S19 17 19 21"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.4"/><path d="M5 21c0-4 3-6.6 7-6.6S19 17 19 21"/></svg>
         <div>
           <h3>Direito Civil</h3>
           <p class="a-desc">Relações contratuais, patrimoniais e sucessórias.</p>
         </div>
       </div>
       <div class="area-card tilt-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg>
         <div>
           <h3>Compliance</h3>
           <p class="a-desc">Programas de integridade e gestão de risco jurídico.</p>
@@ -428,17 +546,23 @@
     </div>
     <div class="dif-grid">
       <div class="dif-card tilt-card">
-        <div class="mark">A</div>
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4V5z"/></svg>
+        </div>
         <h3>Atendimento próximo</h3>
         <p>Relação direta com os sócios em cada caso.</p>
       </div>
       <div class="dif-card tilt-card">
-        <div class="mark">V</div>
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2"/><path d="M12 3.5v2.3M12 18.2v2.3M3.5 12h2.3M18.2 12h2.3"/></svg>
+        </div>
         <h3>Visão estratégica</h3>
         <p>Decisões jurídicas que olham para o negócio como um todo.</p>
       </div>
       <div class="dif-card tilt-card">
-        <div class="mark">C</div>
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M4 9l4-6h8l4 6-10 12L4 9z"/><path d="M4 9h16M8 3l2 6-2 12M16 3l-2 6 2 12"/></svg>
+        </div>
         <h3>Cuidado artesanal</h3>
         <p>Soluções desenhadas sob medida, com profundidade técnica.</p>
       </div>
@@ -465,24 +589,27 @@
         <h2 style="margin-top:16px;">Vamos conversar sobre o seu caso.</h2>
         <p>Entre em contato com o escritório para uma análise inicial. Atendimento das 9h às 18h.</p>
         <div class="contato-actions">
-          <a class="btn btn-primary" href="tel:+551132552568">Agendar atendimento</a>
+          <a class="btn btn-primary" href="tel:+551132552568">Ligar para o escritório</a>
           <a class="btn btn-ghost" href="tel:+551132552568">(11) 3255-2568</a>
         </div>
       </div>
       <div class="contato-card">
-        <div class="row"><span class="k">Telefone</span><span class="v">(11) 3255-2568</span></div>
+        <div class="row"><span class="k">Telefone</span><span class="v"><a href="tel:+551132552568">(11) 3255-2568</a></span></div>
         <div class="row"><span class="k">Atendimento</span><span class="v">9h às 18h</span></div>
-        <div class="row"><span class="k">Escritório</span><span class="v">Moura, Parolin e Barbieri</span></div>
+        <div class="row"><span class="k">Foco de atuação</span><span class="v">Direito Societário</span></div>
         <div class="row"><span class="k">Fundação</span><span class="v">Agosto de 2003</span></div>
+        <p class="contato-note">Endereço, e-mail e WhatsApp em atualização — em breve nesta página.</p>
       </div>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="container">
     <div class="fbrand">
-      <img class="brand-mark foot" src="/logo.webp" alt="Moura, Parolin e Barbieri" />
+      <img class="brand-mark foot" src="/logo.webp" alt="Moura, Parolin e Barbieri" width="36" height="16" />
       <span>© 2026 Moura, Parolin e Barbieri — Advogados Associados</span>
     </div>
     <div class="flinks">
@@ -493,245 +620,12 @@
     </div>
   </div>
 </footer>
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script>
-(function(){
-  "use strict";
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var SILVER = 0xc7cedb;
-  var NAVY = 0x0a1220;
 
-  function buildEmblemGeometry(){
-    // Rectangle frame (edges) matching the institutional mark
-    var frameShape = new THREE.Shape();
-    var w = 2.2, h = 1.5;
-    frameShape.moveTo(-w, -h);
-    frameShape.lineTo(w, -h);
-    frameShape.lineTo(w, h);
-    frameShape.lineTo(-w, h);
-    frameShape.lineTo(-w, -h);
-    var frameGeo = new THREE.ExtrudeGeometry(frameShape, {depth:0.05, bevelEnabled:false, curveSegments:1});
-    var holeShape = new THREE.Shape();
-    var w2 = w - 0.12, h2 = h - 0.12;
-    holeShape.moveTo(-w2,-h2); holeShape.lineTo(w2,-h2); holeShape.lineTo(w2,h2); holeShape.lineTo(-w2,h2); holeShape.lineTo(-w2,-h2);
-    frameShape.holes.push(holeShape);
-    frameGeo.dispose();
-    var finalFrameGeo = new THREE.ExtrudeGeometry(frameShape, {depth:0.05, bevelEnabled:false, curveSegments:1});
-    finalFrameGeo.center();
-    return finalFrameGeo;
-  }
+<div class="mobile-callbar">
+  <a href="tel:+551132552568">Ligar agora — (11) 3255-2568</a>
+</div>
 
-  function buildMountainGeometry(){
-    // Mountain / M silhouette echoing the institutional logo
-    var shape = new THREE.Shape();
-    shape.moveTo(-1.7, -0.75);
-    shape.lineTo(-0.55, 0.85);
-    shape.lineTo(0, -0.05);
-    shape.lineTo(0.55, 0.85);
-    shape.lineTo(1.7, -0.75);
-    shape.lineTo(1.35, -0.75);
-    shape.lineTo(0.55, 0.35);
-    shape.lineTo(0, -0.45);
-    shape.lineTo(-0.55, 0.35);
-    shape.lineTo(-1.35, -0.75);
-    shape.closePath();
-    var geo = new THREE.ExtrudeGeometry(shape, {depth:0.16, bevelEnabled:true, bevelThickness:0.02, bevelSize:0.015, bevelSegments:2, curveSegments:8});
-    geo.center();
-    return geo;
-  }
-
-  function initScene(canvas, opts){
-    opts = opts || {};
-    var particleCount = opts.particleCount || 520;
-    var showEmblem = opts.showEmblem !== false;
-
-    var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true, powerPreference:'low-power'});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 1.5));
-
-    var scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(NAVY, opts.fogDensity || 0.045);
-    var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    camera.position.set(0, 0, 11);
-
-    // Lighting - three point setup, subdued for premium metal look
-    scene.add(new THREE.AmbientLight(0x6f89b3, 0.55));
-    var key = new THREE.DirectionalLight(0xffffff, 1.1);
-    key.position.set(4, 5, 6);
-    scene.add(key);
-    var rim = new THREE.DirectionalLight(0x9db3d6, 0.9);
-    rim.position.set(-6, -2, -4);
-    scene.add(rim);
-    var fill = new THREE.DirectionalLight(0x445b7d, 0.5);
-    fill.position.set(-3, 2, 4);
-    scene.add(fill);
-
-    // Particle field
-    var positions = new Float32Array(particleCount * 3);
-    var depths = new Float32Array(particleCount);
-    for (var i = 0; i < particleCount; i++){
-      var r = 6.5 + Math.random() * 7;
-      var theta = Math.random() * Math.PI * 2;
-      var y = (Math.random() - 0.5) * 9;
-      positions[i*3] = Math.cos(theta) * r * (0.6 + Math.random()*0.4);
-      positions[i*3+1] = y;
-      positions[i*3+2] = Math.sin(theta) * r * 0.5 - 2;
-      depths[i] = Math.random();
-    }
-    var pGeo = new THREE.BufferGeometry();
-    pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    var pMat = new THREE.PointsMaterial({
-      color: SILVER, size: 0.065, sizeAttenuation:true,
-      transparent:true, opacity:0.8, depthWrite:false
-    });
-    var points = new THREE.Points(pGeo, pMat);
-    scene.add(points);
-
-    // Sparse constellation lines between nearby particles (computed once)
-    var lineVerts = [];
-    var maxDist = 2.6, maxLines = 90;
-    outer:
-    for (var a = 0; a < particleCount; a += 3){
-      for (var b = a+1; b < particleCount; b += 5){
-        var dx = positions[a*3]-positions[b*3], dy = positions[a*3+1]-positions[b*3+1], dz = positions[a*3+2]-positions[b*3+2];
-        var d = Math.sqrt(dx*dx+dy*dy+dz*dz);
-        if (d < maxDist){
-          lineVerts.push(positions[a*3],positions[a*3+1],positions[a*3+2], positions[b*3],positions[b*3+1],positions[b*3+2]);
-          if (lineVerts.length/6 >= maxLines) break outer;
-        }
-      }
-    }
-    if (lineVerts.length){
-      var lGeo = new THREE.BufferGeometry();
-      lGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(lineVerts), 3));
-      var lMat = new THREE.LineBasicMaterial({color: SILVER, transparent:true, opacity:0.22});
-      scene.add(new THREE.LineSegments(lGeo, lMat));
-    }
-
-    var emblemGroup = null;
-    if (showEmblem){
-      emblemGroup = new THREE.Group();
-      var mountainMat = new THREE.MeshStandardMaterial({color:0xd7dde6, metalness:0.8, roughness:0.3, emissive:0x0a1220, emissiveIntensity:0.12, transparent:true, opacity:0.85});
-      var mountain = new THREE.Mesh(buildMountainGeometry(), mountainMat);
-      emblemGroup.add(mountain);
-
-      var frameMat = new THREE.MeshStandardMaterial({color:0x9aa4b2, metalness:0.65, roughness:0.42, side:THREE.DoubleSide, transparent:true, opacity:0.7});
-      var frame = new THREE.Mesh(buildEmblemGeometry(), frameMat);
-      frame.scale.set(1.18, 1.18, 1);
-      frame.position.z = -0.12;
-      emblemGroup.add(frame);
-
-      emblemGroup.scale.setScalar(0.95);
-      emblemGroup.position.set(3.4, 0.1, -2.4);
-      emblemGroup.rotation.x = 0.06;
-      emblemGroup.rotation.y = -0.35;
-      scene.add(emblemGroup);
-
-      // soft glow sprite behind emblem (fake bloom via additive blending)
-      var glowCanvas = document.createElement('canvas');
-      glowCanvas.width = 256; glowCanvas.height = 256;
-      var gctx = glowCanvas.getContext('2d');
-      var grad = gctx.createRadialGradient(128,128,0,128,128,128);
-      grad.addColorStop(0, 'rgba(170,190,220,0.55)');
-      grad.addColorStop(1, 'rgba(170,190,220,0)');
-      gctx.fillStyle = grad;
-      gctx.fillRect(0,0,256,256);
-      var glowTex = new THREE.CanvasTexture(glowCanvas);
-      var glowMat = new THREE.SpriteMaterial({map:glowTex, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending});
-      var glow = new THREE.Sprite(glowMat);
-      glow.scale.set(6,6,1);
-      glow.position.copy(emblemGroup.position);
-      glow.position.z += 0.3;
-      scene.add(glow);
-    }
-
-    var mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-    function onPointerMove(e){
-      var rect = canvas.getBoundingClientRect();
-      var x = (e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0].clientX) || rect.width/2);
-      var y = (e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0].clientY) || rect.height/2);
-      targetX = ((x - rect.left) / rect.width - 0.5) * 2;
-      targetY = ((y - rect.top) / rect.height - 0.5) * 2;
-    }
-    window.addEventListener('pointermove', onPointerMove, {passive:true});
-
-    function resize(){
-      var w = canvas.clientWidth, h = canvas.clientHeight;
-      if (w === 0 || h === 0) return;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    var ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-    resize();
-
-    var clock = new THREE.Clock();
-    var lastT = 0;
-    var isVisible = true;
-    var rafId = null;
-    var io = new IntersectionObserver(function(entries){
-      isVisible = entries[0].isIntersecting;
-    }, {threshold:0.01});
-    io.observe(canvas);
-
-    function animate(){
-      rafId = requestAnimationFrame(animate);
-      if (!isVisible) return;
-      var t = clock.getElapsedTime();
-      if (reduced && t - lastT < 0.5) { renderer.render(scene, camera); return; }
-      lastT = t;
-
-      mouseX += (targetX - mouseX) * 0.04;
-      mouseY += (targetY - mouseY) * 0.04;
-
-      points.rotation.y = t * 0.02;
-      points.rotation.x = mouseY * 0.06;
-
-      if (emblemGroup){
-        emblemGroup.rotation.y = -0.35 + Math.sin(t * 0.15) * 0.2 + mouseX * 0.15;
-        emblemGroup.rotation.x = 0.06 + mouseY * 0.08;
-      }
-      camera.position.x += (mouseX * 0.6 - camera.position.x) * 0.03;
-      camera.position.y += (-mouseY * 0.4 - camera.position.y) * 0.03;
-      camera.lookAt(0,0,0);
-
-      renderer.render(scene, camera);
-    }
-    animate();
-  }
-
-  var heroCanvas = document.getElementById('hero-canvas');
-  if (heroCanvas && window.THREE){
-    initScene(heroCanvas, {particleCount:420, showEmblem:true});
-  }
-
-  // ---- CSS 3D tilt for cards ----
-  if (!reduced){
-    var tiltEls = document.querySelectorAll('.tilt-card, #tilt-quote, #tilt-stats');
-    tiltEls.forEach(function(el){
-      el.addEventListener('mousemove', function(e){
-        var rect = el.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width - 0.5;
-        var py = (e.clientY - rect.top) / rect.height - 0.5;
-        var rotY = px * 10;
-        var rotX = -py * 10;
-        el.style.transform = 'perspective(700px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(4px)';
-      });
-      el.addEventListener('mouseleave', function(){
-        el.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-      });
-    });
-  }
-
-  // ---- Nav background on scroll ----
-  var nav = document.querySelector('header.site-nav');
-  window.addEventListener('scroll', function(){
-    if (window.scrollY > 40){
-      nav.style.background = 'rgba(10,18,32,0.92)';
-    } else {
-      nav.style.background = 'rgba(10,18,32,0.72)';
-    }
-  }, {passive:true});
-})();
-</script>
-<!-- deploy test 1786056516 -->
+<script src="/three.min.js" defer></script>
+<script src="/app.js" defer></script>
+</body>
+</html>
